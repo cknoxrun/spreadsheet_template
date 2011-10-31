@@ -1,11 +1,5 @@
-require 'spreadsheet_template'
-require 'rails'
-
-module SpreadsheetTemplate
-  class SpreadsheetTemplateRailtie < Rails::Railtie
-    initializer "spreadsheet_template_railtie.boot_spreadsheet_template" do
-      Mime::Type.register "application/excel", :xls
-      ActionView::Template.register_template_handler 'rxls', SpreadsheetTemplate::Handler
-    end
+class SpreadsheetTemplate::Railtie < Rails::Railtie
+  initializer "spreadsheet_template.register_template_handler.action_view" do
+    ActionView::Template.register_template_handler 'xlsbuilder', SpreadsheetTemplate::TemplateHandler
   end
 end
